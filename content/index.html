@@ -1,0 +1,37 @@
+===
+extends: show.j2
+slides:
+    opening:
+        -
+            type: title
+            title: Slyde - Powered by hyde
+        -
+            type: subtitle
+            title: Slyde
+            subtitle: A minimal slideshow generator using hyde
+        -
+            type: text
+            title: Goals
+            text: |
+                *   Easy
+                *   Fast
+                *   Super minimal
+                *   More CSS, less JS
+                *   Markdown
+        -
+            type: text
+            text: |
+                Create beautiful slideshows with nothing more than textmate or vim.
+            style: dark
+            background: motivation
+===
+
+{% block main %}
+
+{% for slide in resource.meta.slides.opening -%}
+{{ add_slide(slide) }}
+{%- endfor %}
+
+{{ super() }}
+
+{% endblock %}

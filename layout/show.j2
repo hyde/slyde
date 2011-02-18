@@ -1,0 +1,41 @@
+{% extends "root.j2" -%}
+
+{% import "layouts.j2" as layouts -%}
+
+{% set slides = [] -%}
+
+{% macro add_slide_resource(resource) -%}
+{% do slides.append(resource.meta) -%}
+{%- endmacro %}
+
+{% macro add_slide(item) -%}
+{% do slides.append(item) -%}
+{%- endmacro %}
+
+{% macro add_slides(node_name) -%}
+{% set slides = site.content.node_from_relative_path(node_name) -%}
+{% for slide in slides.walk_resources_sorted_by_index() -%}
+{{ add_slide_resource(slide) }}
+{%- endfor %}
+{%- endmacro %}
+
+{% block main  -%}
+<ol class="slides">
+{% for slide in slides -%}
+<li class="slide{{ ' lastslide' if loop.last }}">
+{{ layouts.slide(slide.type, slide) }}
+</li>
+{%- endfor %}
+</ol>
+{%- endblock %}
+
+{% block js %}
+<script src="{{ media_url( 'js/jquery-1.4.2.min.js') }}" type="text/javascript"></script>
+<script src="{{ media_url('js/jquery.history.js') }}" type="text/javascript"></script>
+<script src="{{ media_url('js/slippy.js') }}" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".slide").slippy();
+    });
+</script>
+{% endblock %}

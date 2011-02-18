@@ -1,0 +1,39 @@
+media_root:: media
+media_url: /media
+base_url: /
+deploy_root: deploy
+template: hyde.ext.templates.jinja.Jinja2Template
+plugins:
+    - hyde.ext.plugins.folders.FlattenerPlugin
+    - hyde.ext.plugins.meta.MetaPlugin
+    - hyde.ext.plugins.auto_extend.AutoExtendPlugin
+    - hyde.ext.plugins.less.LessCSSPlugin
+    - hyde.ext.plugins.blockdown.BlockdownPlugin
+    - hyde.ext.plugins.sorter.SorterPlugin
+    - hyde.ext.plugins.grouper.GrouperPlugin
+    - hyde.ext.plugins.markings.MarkingsPlugin
+    - hyde.ext.plugins.markings.ReferencePlugin
+    - hyde.ext.plugins.syntext.SyntextPlugin
+    - hyde.ext.plugins.textlinks.TextlinksPlugin
+context:
+meta:
+    nodemeta: meta.yaml
+    index: -1
+    keywords: >
+                hyde,python,django,jinja,static website,static site,
+                generator,html generator
+    author: Lakshmi Vyasarajan
+less:
+    app: ~/local/bin/lessc
+markdown:
+    extensions:
+        - def_list
+        - headerid
+        - tables
+sorter:
+    index:
+        attr:
+            - meta.index
+        filters:
+            source.kind: slide
+            is_processable: false

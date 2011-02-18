@@ -1,0 +1,42 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="{{ resource.meta.description }}">
+    <meta name="author" content="{{ resource.meta.author }}">
+    <title>{% block title -%}{{ resource.meta.title }}{%- endblock %}</title>
+    {% block favicons -%}
+    <link rel="shortcut icon" href="{{ media_url('/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ media_url('/apple-touch-icon.png') }}">
+    {%- endblock favicons %}
+
+    {% block css -%}
+    <link rel="stylesheet" href="{{ media_url('css/slippy.css') }}">
+    <link rel="stylesheet" href="{{ media_url('css/slippy-pure.css') }}">
+    <link rel="stylesheet" href="{{ media_url('css/slyde.css') }}">
+    <link rel="stylesheet" href="{{ media_url('css/syntax.css') }}">
+    {%- endblock css %}
+
+    {% block head %}
+        
+    {% endblock %}
+
+</head>
+<body id="{{ resource.meta.id if resource.meta.id else resource.slug }}">
+{% block content -%}
+  <div id="container">
+      {% block container -%}
+      <div id="main" role="main">
+          <header class="banner clearfix">
+          {% block header -%}{%- endblock %}
+          </header>
+          {% block main -%}{%- endblock main %}
+      </div>
+      <footer>
+        {% block footer -%}{%- endblock %}
+      </footer>
+    {%- endblock container %}
+  </div>
+  {%- endblock content%}
+  {% block js -%}
+  {%- endblock js %}
+</body>

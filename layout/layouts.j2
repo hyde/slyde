@@ -1,0 +1,39 @@
+{% set types = dict(text='text',
+                    title='title',
+                    subtitle='subtitle',
+                    footer='footer',
+                    notes='notes') -%}
+
+{% macro title(props) -%}
+{{ ('# '~props.title)|markdown|typogrify if props.title }}
+{%- endmacro %}
+
+{% macro subtitle(props) -%}
+{{ ('## '~props.subtitle)|markdown|typogrify if props.subtitle }}
+{%- endmacro %}
+
+{% macro txt(props) -%}
+{{ props.text|markdown|typogrify if props.text }}
+{%- endmacro %}
+
+{% macro notes(props) -%}
+{{ props.notes|markdown|typogrify if props.notes }}
+{%- endmacro %}
+
+{% macro footer(props) -%}
+{{ props.footer|markdown|typogrify if props.footer }}
+{%- endmacro %}
+
+{% macro slide(type, props) -%}
+<div id="content">
+<article class="{{ type }}{{ ' '~props.style if props.style }}">
+    <header>
+        {{ title(props) }}
+        {{ subtitle(props) }}
+    </header>
+    {{ txt(props) }}
+    <footer>{{ footer(props) }}</footer>
+</article>
+<aside id="notes">{{ notes(props) }}</aside>
+</div>
+{%- endmacro %}
