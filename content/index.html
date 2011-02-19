@@ -1,5 +1,4 @@
 ===
-extends: show.j2
 slides:
     opening:
         -
@@ -26,12 +25,4 @@ slides:
             background: motivation
 ===
 
-{% block main %}
-
-{% for slide in resource.meta.slides.opening -%}
-{{ add_slide(slide) }}
-{%- endfor %}
-
-{{ super() }}
-
-{% endblock %}
+{{ add_slides(resource.meta.slides.opening) }}

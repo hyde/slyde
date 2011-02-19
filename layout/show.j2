@@ -12,14 +12,22 @@
 {% do slides.append(item) -%}
 {%- endmacro %}
 
-{% macro add_slides(node_name) -%}
+{% macro add_slides_from_node(node_name) -%}
 {% set slides = site.content.node_from_relative_path(node_name) -%}
 {% for slide in slides.walk_resources_sorted_by_index() -%}
 {{ add_slide_resource(slide) }}
 {%- endfor %}
 {%- endmacro %}
 
-{% block main  -%}
+{% macro add_slides(items) -%}
+{% for slide in items -%}
+{{ add_slide(slide) }}
+{%- endfor %}
+{%- endmacro %}
+
+{% block main %}
+{% block init -%}{%- endblock %}
+{% block slides -%}
 <ol class="slides">
 {% for slide in slides -%}
 <li class="slide{{ ' lastslide' if loop.last }}">
@@ -28,6 +36,8 @@
 {%- endfor %}
 </ol>
 {%- endblock %}
+{% endblock %}
+
 
 {% block js %}
 <script src="{{ media_url( 'js/jquery-1.4.2.min.js') }}" type="text/javascript"></script>

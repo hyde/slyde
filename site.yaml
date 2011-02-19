@@ -18,6 +18,8 @@ plugins:
 context:
 meta:
     nodemeta: meta.yaml
+    extends: show.j2
+    default_block: init
     index: -1
     keywords: >
                 hyde,python,django,jinja,static website,static site,
